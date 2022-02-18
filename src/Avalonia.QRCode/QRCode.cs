@@ -16,7 +16,7 @@ public class QRCode : Control
 
     public static readonly StyledProperty<IBrush> SpaceBrushProperty = AvaloniaProperty.Register<QRCode, IBrush>(nameof(SpaceBrush), Brushes.White);
 
-    public static readonly StyledProperty<bool> DrawQuietZonesProperty = AvaloniaProperty.Register<QRCode, bool>(nameof(DrawQuietZones), true);
+    public static readonly StyledProperty<int> BorderSizeProperty = AvaloniaProperty.Register<QRCode, int>(nameof(BorderSize), 0);
 
     public static readonly StyledProperty<string> DataProperty = AvaloniaProperty.Register<QRCode, string>(nameof(Data), string.Empty);
 
@@ -86,12 +86,13 @@ public class QRCode : Control
     /// <summary>
     /// If true a white border is drawn around the whole QR Code
     /// </summary>
-    public bool DrawQuietZones
+    public int BorderSize
     {
-        get { return GetValue(DrawQuietZonesProperty); }
-        set 
-        { 
-            SetValue(DrawQuietZonesProperty, value);
+        get { return GetValue(BorderSizeProperty); }
+        set
+        {
+            if (value < 0) value = 0;
+            SetValue(BorderSizeProperty, value);
         }
     }
 
@@ -133,14 +134,14 @@ public class QRCode : Control
 
     public QRCode()
     {
-        AffectsRender<QRCode>(DataProperty, PixelsPerModuleProperty, DrawQuietZonesProperty, ColorProperty, SpaceBrushProperty, IconProperty, IconScaleProperty, IconBorderWidthProperty);
+        AffectsRender<QRCode>(DataProperty, PixelsPerModuleProperty, BorderSizeProperty, ColorProperty, SpaceBrushProperty, IconProperty, IconScaleProperty, IconBorderWidthProperty);
     }
 
 
     public override void Render(DrawingContext context)
     {
         var qr = QrCode.EncodeText(Data, QrCode.Ecc.High);
-        using var image = qr.ToBitmap(PixelsPerModule, 1, SixLabors.ImageSharp.Color.ParseHex(Color.ToHex()),
+        using var image = qr.ToBitmap(PixelsPerModule, BorderSize, SixLabors.ImageSharp.Color.ParseHex(Color.ToHex()),
             SixLabors.ImageSharp.Color.ParseHex(SpaceBrush.ToHex()));
         using var memory = new MemoryStream();
         image.SaveAsPng(memory);

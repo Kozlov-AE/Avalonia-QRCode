@@ -26,7 +26,7 @@
                Data="{Binding Data}" 
                Color="{Binding ColorHex, Converter={StaticResource HexToColorConverter}}" 
                SpaceBrush="{Binding SpaceColorHex, Converter={StaticResource HexToColorConverter}}" 
-               DrawQuietZones="{Binding QuitZones}"
+               BorderSize="{Binding QuitZones}"
                PixelsPerModule="{Binding PixelsPerModule}"
                Icon="{Binding IconSource}"
                IconScale="{Binding IconScale}"
@@ -43,7 +43,7 @@
         <NumericUpDown Grid.Column="1" Grid.Row="1" Minimum="1" Maximum="99" Value="{Binding PixelsPerModule}" VerticalAlignment="Center" Margin="{DynamicResource DefaultMargin}"/>
         
         <TextBlock Grid.Column="0" Grid.Row="2"  Text="Quiet Zones" Foreground="White" VerticalAlignment="Center" Margin="{DynamicResource DefaultMargin}"/>
-        <ToggleSwitch Grid.Column="1" Grid.Row="2" IsChecked="{Binding QuitZones}" VerticalAlignment="Center" Margin="{DynamicResource DefaultMargin}"/>
+        <NumericUpDown Grid.Column="1" Grid.Row="2" Value="{Binding QuitZones}" VerticalAlignment="Center" Margin="{DynamicResource DefaultMargin}"/>
 
         <TextBlock Grid.Column="0" Grid.Row="3"  Text="Color" Foreground="White" VerticalAlignment="Center"  Margin="{DynamicResource DefaultMargin}"/>
         <TextBox Grid.Column="1" Grid.Row="3" Watermark="Hex Value" Text="{Binding ColorHex}" VerticalAlignment="Center" Margin="{DynamicResource DefaultMargin}"/>

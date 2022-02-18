@@ -42,7 +42,7 @@ public class MainWindowViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref pixelsPerModule, value);
     }
 
-    public bool QuitZones
+    public int QuitZones
     {
         get => quitZones;
         set => this.RaiseAndSetIfChanged(ref quitZones, value);
@@ -98,7 +98,7 @@ public class MainWindowViewModel : ViewModelBase
 
     private string data;
     private int pixelsPerModule;
-    private bool quitZones;
+    private int quitZones;
     private string colorHex;
     private string spaceColorHex;
 
