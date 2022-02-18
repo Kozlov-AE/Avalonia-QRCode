@@ -1,12 +1,11 @@
 using Avalonia.Controls;
 
-namespace Sample.Linux.Views
+namespace Sample.Linux.Views;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
