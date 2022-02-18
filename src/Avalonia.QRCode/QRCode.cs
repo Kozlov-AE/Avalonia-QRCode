@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using System.IO;
+using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using QRCoder;
@@ -138,17 +139,19 @@ namespace Avalonia.QRCode
 
         public override void Render(DrawingContext context)
         {
+            Image image;
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(Data, QRCodeGenerator.ECCLevel.Q);
-            QRCoder.QRCode qrCode = new QRCoder.QRCode(qrCodeData);
-            System.Drawing.Bitmap systemBitmap = null;
+            //QRCoder.QRCode qrCode = new QRCoder.QRCode(qrCodeData);
+            var qrCode = new BitmapByteQRCode(qrCodeData);
 
-            if (Icon == null)
-                systemBitmap = qrCode.GetGraphic(PixelsPerModule, Color.ToHex(), SpaceBrush.ToHex(), DrawQuietZones);
-            else
-                systemBitmap = qrCode.GetGraphic(PixelsPerModule, Color.FromNative(), SpaceBrush.FromNative(), Icon.FromNative(), IconScale, IconBorderWidth, DrawQuietZones);
+            //System.Drawing.Bitmap systemBitmap = null;
 
-            var source = systemBitmap.ToNative();
-
+            var cc = qrCode.GetGraphic(PixelsPerModule, Color.ToBytesArray(), SpaceBrush.ToBytesArray());
+            using var memory = new MemoryStream(cc);
+            memory.Position = 0;
+            var source = new Bitmap(memory);
 
             if (source != null && Bounds.Width > 0 && Bounds.Height > 0)
             {
@@ -168,10 +171,5 @@ namespace Avalonia.QRCode
                 context.DrawImage(source, sourceRect, destRect, interpolationMode);
             }
         }
-
-
-        Image image;
-        QRCodeGenerator qrGenerator = new QRCodeGenerator();
-
     }
 }

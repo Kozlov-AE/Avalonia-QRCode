@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Globalization;
 
 namespace Avalonia.QRCode
 {
@@ -18,15 +19,31 @@ namespace Avalonia.QRCode
             var c = scb.Color;
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");      
         }
+        public static byte[] ToBytesArray(this IBrush brush)
+        {            
+            var scb = brush as ISolidColorBrush;            
+            var c = scb.Color;
+            return c.ToBytesArray();
+        }
 
         public static string ToHex(this Media.Color c)
         {
             return "#" + c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
         }
-
-
-
-
+        
+        public static byte[] ToBytesArray(this Media.Color c)
+        {
+            var hex = c.R.ToString("X2") + c.G.ToString("X2") + c.B.ToString("X2");
+            var bytes = new byte[hex.Length / 2];
+            var span = hex.AsSpan();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                //bytes[i] = byte.Parse(span.Slice(i * 2, 2), NumberStyles.HexNumber);
+                bytes[i] = byte.Parse(span.Slice(i * 2, 2).ToString(), NumberStyles.HexNumber);
+            }
+            return bytes;
+        }
+        
         public static System.Drawing.Color FromNative(this IBrush brush)
         {
             var scb = brush as ISolidColorBrush;
@@ -74,8 +91,5 @@ namespace Avalonia.QRCode
                 return new System.Drawing.Bitmap(memory);
             }
         }
-
-
-
     }
 }

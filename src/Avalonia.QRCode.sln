@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.QRCode", "Avalonia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{F7EDA1B5-63AA-4E55-A4E4-1FF7A61D6747}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Linux", "Sample.Linux\Sample.Linux.csproj", "{F9D75442-8EF5-45C4-8A62-A82219922BA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F7EDA1B5-63AA-4E55-A4E4-1FF7A61D6747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7EDA1B5-63AA-4E55-A4E4-1FF7A61D6747}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7EDA1B5-63AA-4E55-A4E4-1FF7A61D6747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9D75442-8EF5-45C4-8A62-A82219922BA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9D75442-8EF5-45C4-8A62-A82219922BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9D75442-8EF5-45C4-8A62-A82219922BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9D75442-8EF5-45C4-8A62-A82219922BA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
